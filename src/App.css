@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+.activation {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 350px;
+  margin: 3px;
+}
+
+.true {
+  background-color: rgb(39, 214, 19);
+}
+
+.false {
+  background-color: rgba(231, 34, 24, 0.797);
+}
+
+button {
+  background-color: rgba(255, 3, 3, 0.907);
+  color: white;
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}

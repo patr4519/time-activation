@@ -14,17 +14,20 @@ function App() {
       });
   }, []);
 
-  // const addDateToServer = async () => {
-  //   try {
-  //     const { data } = await axios.post('https://63de9e9ff1af41051b16642d.mockapi.io/activations', {
-  //       activationTime: Date.now(),
-  //     });
+  const addDateToServer = async () => {
+    try {
+      const { data } = await axios.post(
+        "https://63de9e9ff1af41051b16642d.mockapi.io/activations",
+        {
+          activationTime: Date.now(),
+        }
+      );
 
-  //     setCartItems((prev) => [...prev, data]);
-  //   } catch (error) {
-  //     alert('Не удалось добавить элемент')
-  //   }
-  // }
+      setActivations((prev) => [...prev, data]);
+    } catch (error) {
+      alert("Не удалось добавить элемент");
+    }
+  };
 
   const onRemoveId = async (id) => {
     try {
@@ -34,7 +37,7 @@ function App() {
 
       setActivations((prev) => prev.filter((item) => item.id !== data.id));
     } catch (error) {
-      alert("Что-то пошло не так при удалении элемента");
+      alert("Не удалось удалить элемент");
     }
   };
 
@@ -53,30 +56,15 @@ function App() {
             );
           })
         : "Loading..."}
-      <Activation />
+      <Activation addDateToServer={addDateToServer}/>
     </div>
   );
 }
 
-function Activation() {
-  const [state, setState] = useState();
-
-  const handleClick = () => {
-    setState(addCurrentDate);
-  };
-
-  const addCurrentDate = () => {
-    axios.post("https://63de9e9ff1af41051b16642d.mockapi.io/activations", {
-      activationTime: Date.now(),
-    });
-
-    return new Date().toString().slice(3, 25);
-  };
-
+function Activation({ addDateToServer }) {
   return (
     <div className="activation">
-      <button onClick={handleClick}>Add new</button>
-      <div>{state}</div>
+      <button onClick={addDateToServer}>Add new</button>
     </div>
   );
 }

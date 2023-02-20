@@ -5,6 +5,7 @@ import axios from "axios";
 
 function App() {
   const [activation, setActivations] = useState([]);
+  const [requestToServer, setRequestToServer] = useState(0);
 
   React.useEffect(() => {
     axios
@@ -15,7 +16,11 @@ function App() {
       .catch((error) => {
         alert(error.message);
       });
-  }, []);
+
+    // setTimeout(() => {
+    //   setRequestToServer((prev) => prev + 1);
+    // }, 60000)
+  }, [requestToServer]);
 
   const addDateToServer = async () => {
     try {
@@ -47,18 +52,17 @@ function App() {
   return (
     <div className="App">
       <h1>Last activation(s)</h1>
-      {activation.length > 0
-        ? activation.map((item) => {
-            return (
-              <Items
-                id={item.id}
-                value={item.activationTime}
-                onRemoveId={onRemoveId}
-                key={item.activationTime}
-              />
-            );
-          })
-        : ""}
+      {activation.length > 0 &&
+        activation.map((item) => {
+          return (
+            <Items
+              id={item.id}
+              value={item.activationTime}
+              onRemoveId={onRemoveId}
+              key={item.activationTime}
+            />
+          );
+        })}
       <div className="activation">
         <button onClick={addDateToServer}>Add new</button>
       </div>
@@ -82,5 +86,13 @@ function Items({ value, id, onRemoveId }) {
     </div>
   );
 }
+
+var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // зона UTC, нужно добавить 1,08e+7 к таймстампу, чтобы получить правильную дату
+
+console.log( msUTC );
+
+var msUTC23_00 = Date.parse('2023-02-19T20:00:00.000Z');
+
+console.log(msUTC23_00)
 
 export default App;

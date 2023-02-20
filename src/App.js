@@ -11,6 +11,9 @@ function App() {
       .get("https://63de9e9ff1af41051b16642d.mockapi.io/activations")
       .then((res) => {
         setActivations(res.data);
+      })
+      .catch((error) => {
+        alert(error.message);
       });
   }, []);
 
@@ -55,16 +58,10 @@ function App() {
               />
             );
           })
-        : "Loading..."}
-      <Activation addDateToServer={addDateToServer}/>
-    </div>
-  );
-}
-
-function Activation({ addDateToServer }) {
-  return (
-    <div className="activation">
-      <button onClick={addDateToServer}>Add new</button>
+        : ""}
+      <div className="activation">
+        <button onClick={addDateToServer}>Add new</button>
+      </div>
     </div>
   );
 }

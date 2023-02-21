@@ -13,7 +13,7 @@ body {
 }
 
 .background {
-  background-image: url('../src/assets/img/backgroundIMG.jpg');
+  background-image: url("../src/assets/img/backgroundIMG.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -52,7 +52,7 @@ body {
     position: absolute;
     right: 5px;
     bottom: 5px;
-  
+
     &:hover {
       cursor: pointer;
       background-color: rgba(73, 60, 60, 0.556);
@@ -68,3 +68,17 @@ body {
   background-color: rgba(231, 34, 24, 0.797);
 }
 
+.addBtn {
+  background-color: rgba(255, 3, 3, 0.907);
+  background-color: rgba(255, 3, 3, 0.907);
+  font-size: 15px;
+  color: white;
+  border: 1px solid black;
+  padding: 7px 30px;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(73, 60, 60, 0.556);
+  }
+}

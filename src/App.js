@@ -65,9 +65,9 @@ function App() {
                 />
               );
             })}
-          <div className="activation">
-            <button onClick={addDateToServer}>Add new</button>
-          </div>
+          {
+            activation.length < 6 && <button className="addBtn" onClick={addDateToServer}>Add new</button> // activation.length < 5
+          }
         </div>
       </div>
     </div>

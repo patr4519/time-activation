@@ -7,20 +7,23 @@ import Skeleton from "./components/Skeleton";
 function App() {
   const [activation, setActivations] = useState([]);
   const [requestToServer, setRequestToServer] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
+    setIsLoading(true);
     axios
       .get("https://63de9e9ff1af41051b16642d.mockapi.io/activations")
       .then((res) => {
         setActivations(res.data);
       })
+      .then(() => setIsLoading(false))
       .catch((error) => {
         alert(error.message);
       });
 
-    // setTimeout(() => {
-    //   setRequestToServer((prev) => prev + 1);
-    // }, 60000);
+    setTimeout(() => {
+      setRequestToServer((prev) => prev + 1);
+    }, 60000);
   }, [requestToServer]);
 
   const addDateToServer = async () => {
@@ -55,7 +58,7 @@ function App() {
       <div className="background">
         <div className="App">
           <h1>Last activation(s)</h1>
-          {activation.length > 0 &&
+          {isLoading ? <Skeleton /> : (activation.length > 0 &&
             activation.map((item) => {
               return (
                 <Items
@@ -65,14 +68,12 @@ function App() {
                   key={item.activationTime}
                 />
               );
-            })}
-          {
-            activation.length < 5 && (
-              <button className="addBtn" onClick={addDateToServer}>
-                Add new
-              </button>
-            )
-          }
+            }))}
+          {activation.length < 5 && (
+            <button className="addBtn" onClick={addDateToServer}>
+              Add new
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -90,7 +91,11 @@ function Items({ value, id, onRemoveId }) {
     >
       <div>Date activation: {activationTime}</div>
       <div>Time has passed: {timePassed} hours</div>
-      {waitTime >= 0 ? <div>Waiting time: {waitTime} hour(s).</div> : <div>Activation is avalible</div>}
+      {waitTime >= 0 ? (
+        <div>Waiting time: {waitTime} hour(s).</div>
+      ) : (
+        <div>Activation is avalible</div>
+      )}
       <button onClick={() => onRemoveId(id)}>Delete</button>
     </div>
   );

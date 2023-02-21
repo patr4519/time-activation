@@ -2,6 +2,7 @@ import "./App.scss";
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import Skeleton from "./components/Skeleton";
 
 function App() {
   const [activation, setActivations] = useState([]);
@@ -17,9 +18,9 @@ function App() {
         alert(error.message);
       });
 
-    setTimeout(() => {
-      setRequestToServer((prev) => prev + 1);
-    }, 60000);
+    // setTimeout(() => {
+    //   setRequestToServer((prev) => prev + 1);
+    // }, 60000);
   }, [requestToServer]);
 
   const addDateToServer = async () => {

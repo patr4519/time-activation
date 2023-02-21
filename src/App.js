@@ -88,7 +88,7 @@ function Items({ value, id, onRemoveId }) {
       <div>
         Time has passed: {Math.floor(timePassed / 1000 / 60 / 60)} hours
       </div>
-      <button onClick={() => onRemoveId(id)}>delete</button>
+      <button onClick={() => onRemoveId(id)}>Delete</button>
     </div>
   );
 }

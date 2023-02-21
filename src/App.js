@@ -19,7 +19,7 @@ function App() {
 
     setTimeout(() => {
       setRequestToServer((prev) => prev + 1);
-    }, 60000)
+    }, 60000);
   }, [requestToServer]);
 
   const addDateToServer = async () => {
@@ -30,7 +30,7 @@ function App() {
           activationTime: Date.now(),
         }
       );
-      
+
       setActivations((prev) => [...prev, data]);
     } catch (error) {
       alert("Не удалось добавить элемент");
@@ -50,21 +50,25 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Last activation(s)</h1>
-      {activation.length > 0 &&
-        activation.map((item) => {
-          return (
-            <Items
-              id={item.id}
-              value={item.activationTime}
-              onRemoveId={onRemoveId}
-              key={item.activationTime}
-            />
-          );
-        })}
-      <div className="activation">
-        <button onClick={addDateToServer}>Add new</button>
+    <div className="wrapper">
+      <div className="background">
+        <div className="App">
+          <h1>Last activation(s)</h1>
+          {activation.length > 0 &&
+            activation.map((item) => {
+              return (
+                <Items
+                  id={item.id}
+                  value={item.activationTime}
+                  onRemoveId={onRemoveId}
+                  key={item.activationTime}
+                />
+              );
+            })}
+          <div className="activation">
+            <button onClick={addDateToServer}>Add new</button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -81,7 +85,9 @@ function Items({ value, id, onRemoveId }) {
       }`}
     >
       <div>Date activation: {activationTime}</div>
-      <div>Time has passed: {Math.floor(timePassed / 1000 / 60 / 60)} hours</div>
+      <div>
+        Time has passed: {Math.floor(timePassed / 1000 / 60 / 60)} hours
+      </div>
       <button onClick={() => onRemoveId(id)}>delete</button>
     </div>
   );
@@ -89,6 +95,5 @@ function Items({ value, id, onRemoveId }) {
 
 // var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // Местное время 11:00 ?
 // console.log( msUTC );
-
 
 export default App;

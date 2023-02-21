@@ -2,6 +2,33 @@
   box-sizing: border-box;
 }
 
+body {
+  padding: 0;
+  margin: 0;
+  background-image: linear-gradient(327deg, #3a3d40 0%, #181719 100%);
+  
+}
+
+.background {
+  background-image: url('../src/assets/img/backgroundIMG.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 800px;
+  display: flex;
+}
+
+.App {
+  margin: auto;
+  width: 500px;
+  border: 1px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.507);
+}
+
 .activation {
   padding: 10px;
   border: 1px solid black;
@@ -24,8 +51,9 @@ button {
   border: 0;
   padding: 5px;
   border-radius: 5px;
-}
 
-button:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(73, 60, 60, 0.556);
+  }
 }

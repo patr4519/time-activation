@@ -17,9 +17,9 @@ function App() {
         alert(error.message);
       });
 
-    // setTimeout(() => {
-    //   setRequestToServer((prev) => prev + 1);
-    // }, 60000)
+    setTimeout(() => {
+      setRequestToServer((prev) => prev + 1);
+    }, 60000)
   }, [requestToServer]);
 
   const addDateToServer = async () => {
@@ -30,7 +30,7 @@ function App() {
           activationTime: Date.now(),
         }
       );
-
+      
       setActivations((prev) => [...prev, data]);
     } catch (error) {
       alert("Не удалось добавить элемент");
@@ -77,22 +77,19 @@ function Items({ value, id, onRemoveId }) {
   return (
     <div
       className={`activation ${
-        Math.floor(timePassed / 1000 / 60) >= 1 ? "true" : "false"
+        Math.floor(timePassed / 1000 / 60 / 60) >= 24 ? "true" : "false"
       }`}
     >
       <div>Date activation: {activationTime}</div>
-      <div>Time has passed: {Math.floor(timePassed / 1000 / 60)} min</div>
+      <div>Time has passed: {Math.floor(timePassed / 1000 / 60 / 60)} hours</div>
       <button onClick={() => onRemoveId(id)}>delete</button>
     </div>
   );
 }
 
-var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // зона UTC, нужно добавить 1,08e+7 к таймстампу, чтобы получить правильную дату
+// var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // зона UTC, нужно добавить 1,08e+7 к таймстампу, чтобы получить правильную дату
 
-console.log( msUTC );
+// console.log( msUTC );
 
-var msUTC23_00 = Date.parse('2023-02-19T20:00:00.000Z');
-
-console.log(msUTC23_00)
 
 export default App;

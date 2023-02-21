@@ -10,7 +10,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {
-    setIsLoading(true);
     axios
       .get("https://63de9e9ff1af41051b16642d.mockapi.io/activations")
       .then((res) => {
@@ -101,7 +100,6 @@ function Items({ value, id, onRemoveId }) {
   );
 }
 
-// var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // Местное время 11:00 ?
-// console.log( msUTC );
+// let msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // Местное время 11:00 ?
 
 export default App;

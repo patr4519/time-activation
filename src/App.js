@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -87,8 +87,7 @@ function Items({ value, id, onRemoveId }) {
   );
 }
 
-// var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // зона UTC, нужно добавить 1,08e+7 к таймстампу, чтобы получить правильную дату
-
+// var msUTC = Date.parse('2023-02-19T14:00:00.000Z'); // Местное время 11:00 ?
 // console.log( msUTC );
 
 

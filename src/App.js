@@ -41,14 +41,18 @@ function App() {
   };
 
   const onRemoveId = async (id) => {
-    try {
-      const { data } = await axios.delete(
-        `https://63de9e9ff1af41051b16642d.mockapi.io/activations/${id}`
-      );
+    let userAnswer = window.confirm("Are you sure?");
 
-      setActivations((prev) => prev.filter((item) => item.id !== data.id));
-    } catch (error) {
-      alert("Не удалось удалить элемент");
+    if (userAnswer) {
+      try {
+        const { data } = await axios.delete(
+          `https://63de9e9ff1af41051b16642d.mockapi.io/activations/${id}`
+        );
+
+        setActivations((prev) => prev.filter((item) => item.id !== data.id));
+      } catch (error) {
+        alert("Не удалось удалить элемент");
+      }
     }
   };
 
@@ -57,7 +61,10 @@ function App() {
       <div className="background">
         <div className="App">
           <h1>Last activation(s)</h1>
-          {isLoading ? <Skeleton /> : (activation.length > 0 &&
+          {isLoading ? (
+            <Skeleton />
+          ) : (
+            activation.length > 0 &&
             activation.map((item) => {
               return (
                 <Items
@@ -67,7 +74,8 @@ function App() {
                   key={item.activationTime}
                 />
               );
-            }))}
+            })
+          )}
           {activation.length < 5 && (
             <button className="addBtn" onClick={addDateToServer}>
               Add new

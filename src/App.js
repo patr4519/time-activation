@@ -66,7 +66,7 @@ function App() {
               );
             })}
           {
-            activation.length < 6 && <button className="addBtn" onClick={addDateToServer}>Add new</button> // activation.length < 5
+            activation.length < 6 && <button className="addBtn" onClick={addDateToServer}>Add new</button> // activation.length < 5 Дописать
           }
         </div>
       </div>
@@ -75,18 +75,22 @@ function App() {
 }
 
 function Items({ value, id, onRemoveId }) {
-  const timePassed = Date.now() - value;
-  const activationTime = new Date(value).toString().slice(3, 25);
+  const timePassed = Math.floor((Date.now() - value)/1000/60/60); // прошло полных часов с момента активации
+  const activationTime = new Date(value).toString().slice(3, 25); // время активации (с сервера)
+  const waitTime = 24 - timePassed;
 
   return (
     <div
       className={`activation ${
-        Math.floor(timePassed / 1000 / 60 / 60) >= 24 ? "true" : "false"
+        timePassed >= 24 ? "avalible" : "notAvalible"
       }`}
     >
       <div>Date activation: {activationTime}</div>
       <div>
-        Time has passed: {Math.floor(timePassed / 1000 / 60 / 60)} hours
+        Time has passed: {timePassed} hours
+      </div>
+      <div>
+        Waiting time: {waitTime} hour(s).
       </div>
       <button onClick={() => onRemoveId(id)}>Delete</button>
     </div>

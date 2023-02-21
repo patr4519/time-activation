@@ -38,7 +38,7 @@ body {
   border: 1px solid black;
   border-radius: 5px;
   width: 350px;
-  height: 90px;
+  height: 100px;
   margin: 3px;
   position: relative;
 
@@ -60,11 +60,11 @@ body {
   }
 }
 
-.true {
+.avalible {
   background-color: rgba(39, 214, 19, 0.751);
 }
 
-.false {
+.notAvalible {
   background-color: rgba(231, 34, 24, 0.797);
 }
 

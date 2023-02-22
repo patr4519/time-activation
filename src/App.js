@@ -32,11 +32,12 @@ function App() {
         "https://63de9e9ff1af41051b16642d.mockapi.io/activations",
         {
           activationTime: Date.now(),
-          userName: inputValue,
+          userName: inputValue ? inputValue : 'unknown',
         }
       );
 
       setActivations((prev) => [...prev, data]);
+      setInputValue('');
     } catch (error) {
       alert("Не удалось добавить элемент");
     }

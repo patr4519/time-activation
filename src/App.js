@@ -8,6 +8,7 @@ function App() {
   const [activation, setActivations] = useState([]);
   const [requestToServer, setRequestToServer] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [inputValue, setInputValue] = useState("");
 
   React.useEffect(() => {
     axios
@@ -31,6 +32,7 @@ function App() {
         "https://63de9e9ff1af41051b16642d.mockapi.io/activations",
         {
           activationTime: Date.now(),
+          userName: inputValue,
         }
       );
 
@@ -56,6 +58,10 @@ function App() {
     }
   };
 
+  const onInputChange = (e) => {
+    setInputValue(e.target.value)
+  };
+
   return (
     <div className="wrapper">
       <div className="background">
@@ -69,6 +75,7 @@ function App() {
               return (
                 <Items
                   id={item.id}
+                  userName={item.userName}
                   value={item.activationTime}
                   onRemoveId={onRemoveId}
                   key={item.activationTime}
@@ -76,10 +83,13 @@ function App() {
               );
             })
           )}
-          {activation.length < 5 && (
-            <button className="addBtn" onClick={addDateToServer}>
-              Add new
-            </button>
+          {activation.length < 6 && (
+            <>
+              <input placeholder="User name..." value={inputValue} onChange={(e) => onInputChange(e)}/>
+              <button className="addBtn" onClick={addDateToServer}>
+                Add new
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -87,7 +97,7 @@ function App() {
   );
 }
 
-function Items({ value, id, onRemoveId }) {
+function Items({ value, id, onRemoveId, userName }) {
   const timePassed = Math.floor((Date.now() - value) / 1000 / 60 / 60); // прошло полных часов с момента активации
   const activationTime = new Date(value).toString().slice(3, 25); // время активации (с сервера)
   const waitTime = 24 - timePassed;
@@ -103,6 +113,7 @@ function Items({ value, id, onRemoveId }) {
       ) : (
         <div>Activation is avalible</div>
       )}
+      <div>User name: {userName}</div>
       <button onClick={() => onRemoveId(id)}>Delete</button>
     </div>
   );

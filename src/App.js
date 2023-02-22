@@ -112,7 +112,7 @@ function Items({ value, id, onRemoveId, userName }) {
     >
       <div>Date activation: {activationTime}</div>
       <div>Time has passed: {timePassed} hours</div>
-      {waitTime >= 0 ? (
+      {waitTime > 0 ? (
         <div>Waiting time: {waitTime} hour(s).</div>
       ) : (
         <div>Activation is avalible</div>

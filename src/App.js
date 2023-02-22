@@ -68,8 +68,6 @@ function App() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="background">
         <div className="App">
           <h1>Last activation(s)</h1>
           {isLoading ? (
@@ -100,8 +98,6 @@ function App() {
             </>
           )}
         </div>
-      </div>
-    </div>
   );
 }
 

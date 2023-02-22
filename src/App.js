@@ -39,7 +39,7 @@ function App() {
       setActivations((prev) => [...prev, data]);
       setInputValue('');
     } catch (error) {
-      alert("Не удалось добавить элемент");
+      alert("Не удалось добавить пользователя");
     }
   };
 
@@ -54,7 +54,7 @@ function App() {
 
         setActivations((prev) => prev.filter((item) => item.id !== data.id));
       } catch (error) {
-        alert("Не удалось удалить элемент");
+        alert("Не удалось удалить пользователя");
       }
     }
   };

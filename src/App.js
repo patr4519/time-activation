@@ -3,12 +3,14 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import Skeleton from "./components/Skeleton";
+import Plug from "./components/Plug";
 
 function App() {
   const [activation, setActivations] = useState([]);
   const [requestToServer, setRequestToServer] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const [plug, setPlug] = useState(false);
 
   React.useEffect(() => {
     axios
@@ -18,7 +20,7 @@ function App() {
       })
       .then(() => setIsLoading(false))
       .catch((error) => {
-        alert(error.message);
+        console.log(error.message);
       });
 
     setTimeout(() => {
@@ -27,6 +29,7 @@ function App() {
   }, [requestToServer]);
 
   const addDateToServer = async () => {
+    setPlug(true);
     try {
       const { data } = await axios.post(
         "https://63de9e9ff1af41051b16642d.mockapi.io/activations",
@@ -38,6 +41,7 @@ function App() {
 
       setActivations((prev) => [...prev, data]);
       setInputValue('');
+      setPlug(false);
     } catch (error) {
       alert("Не удалось добавить пользователя");
     }
@@ -71,7 +75,7 @@ function App() {
           {isLoading ? (
             <Skeleton />
           ) : (
-            activation.length > 0 &&
+            activation.length >= 0 &&
             activation.map((item) => {
               return (
                 <Items
@@ -84,7 +88,10 @@ function App() {
               );
             })
           )}
-          {activation.length < 6 && (
+          {
+            plug && <Plug />
+          }
+          {activation.length < 5 && (
             <>
               <input placeholder="User name..." value={inputValue} onChange={(e) => onInputChange(e)}/>
               <button className="addBtn" onClick={addDateToServer}>

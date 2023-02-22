@@ -47,7 +47,7 @@ body {
 .activation {
   padding: 10px;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 15px;
   width: 350px;
   height: 125px;
   margin: 3px;
@@ -92,4 +92,10 @@ body {
     cursor: pointer;
     background-color: rgba(73, 60, 60, 0.556);
   }
+}
+
+.plug {
+  background-color: black;
+  width: 350px;
+  height: 125px;
 }
